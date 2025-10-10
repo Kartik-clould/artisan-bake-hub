@@ -20,7 +20,7 @@ const Hero = ({ onOrderNow }: HeroProps) => {
 
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <div className="animate-float">
-          <div className="text-6xl mb-6">🥖</div>
+          <div className="text-6xl mb-6 font-extrabold text-accent drop-shadow-sm" style={{fontFamily: 'Abril Fatface, serif', letterSpacing: '0.05em'}}>SHAHI</div>
         </div>
         <h2 className="text-5xl md:text-7xl font-bold font-serif text-primary-foreground mb-6 fade-in-up">
           Freshly Baked

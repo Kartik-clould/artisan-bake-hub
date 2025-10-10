@@ -22,54 +22,54 @@ const products: Product[] = [
   {
     id: 1,
     name: "Chocolate Cake",
-    price: 35.99,
+    price: 350,
     description: "Rich chocolate layers with ganache",
     image: chocolateCake,
     category: "Cakes",
   },
   {
     id: 2,
-    name: "Fresh Croissants",
-    price: 4.99,
-    description: "Buttery, flaky perfection",
-    image: croissants,
-    category: "Pastries",
+    name: "Rusk",
+    price: 45,
+    description: "Crispy, twice-baked bread",
+    image: croissants, // Placeholder image, update if you have rusk image
+    category: "Snacks",
   },
   {
     id: 3,
-    name: "Sourdough Bread",
-    price: 7.99,
-    description: "Artisan sourdough with crispy crust",
-    image: sourdough,
-    category: "Breads",
-  },
-  {
-    id: 4,
-    name: "Chocolate Chip Cookies",
-    price: 12.99,
-    description: "Classic cookies, dozen",
-    image: cookies,
+    name: "Little Hearts Cookies",
+    price: 60,
+    description: "Sweet heart-shaped cookies",
+    image: sourdough, // Placeholder image, update if you have little hearts image
     category: "Cookies",
   },
   {
+    id: 4,
+    name: "Khari",
+    price: 45,
+    description: "Crispy, And Tasty to Enjoy with Tea ",
+    image: cookies, // Placeholder image, update if you have khari image
+    category: "Snacks",
+  },
+  {
     id: 5,
-    name: "Strawberry Cheesecake",
-    price: 32.99,
-    description: "Creamy cheesecake with fresh strawberries",
-    image: cheesecake,
-    category: "Cakes",
+    name: "Indian Bread ",
+    price: 15,
+    description: "Soft, fluffy Indian Bread",
+    image: cheesecake, // Placeholder image, update if you have pav image
+    category: "Breads",
   },
   {
     id: 6,
-    name: "French Macarons",
-    price: 18.99,
-    description: "Assorted flavors, box of 12",
-    image: macarons,
-    category: "Pastries",
+    name: "Cup Cakes",
+    price: 99,
+    description: "Assorted cupcakes, box of 6",
+    image: macarons, // Placeholder image, update if you have cupcake image
+    category: "Cakes",
   },
 ];
 
-const categories = ["All", "Cakes", "Pastries", "Breads", "Cookies"];
+const categories = ["All", "Cakes", "Snacks", "Breads", "Cookies"];
 
 interface MenuProps {
   onAddToCart: (product: Product) => void;
@@ -124,7 +124,8 @@ const Menu = ({ onAddToCart }: MenuProps) => {
           }`}
         >
           <h2 className="text-4xl md:text-5xl font-bold font-serif text-primary mb-4">
-            Our Menu
+            Popular Items 
+            
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Discover our delicious selection of freshly baked goods
@@ -180,7 +181,7 @@ const Menu = ({ onAddToCart }: MenuProps) => {
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="text-2xl font-bold text-primary">
-                    ${product.price.toFixed(2)}
+                    ₹{product.price}
                   </span>
                   <Button
                     onClick={() => handleAddToCart(product)}

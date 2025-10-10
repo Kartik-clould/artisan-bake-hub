@@ -41,9 +41,9 @@ const Header = ({ cartItemCount, onCartClick }: HeaderProps) => {
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => scrollToSection("hero")}
           >
-            <div className="text-3xl animate-pulse-soft">🥐</div>
+            <div className="text-3xl font-extrabold text-accent drop-shadow-sm animate-pulse-soft" style={{fontFamily: 'Abril Fatface, serif', letterSpacing: '0.05em'}}>SHAHI</div>
             <h1 className="text-2xl font-bold font-serif text-primary">
-              Sweet Haven
+              Baker
             </h1>
           </div>
 

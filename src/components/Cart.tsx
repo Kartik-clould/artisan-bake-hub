@@ -66,7 +66,7 @@ const Cart = ({
                     <div className="flex-1">
                       <h4 className="font-semibold">{item.name}</h4>
                       <p className="text-sm text-muted-foreground">
-                        ${item.price.toFixed(2)}
+                        ₹{item.price.toFixed(2)}
                       </p>
                       <div className="flex items-center gap-2 mt-2">
                         <Button
@@ -107,7 +107,7 @@ const Cart = ({
               <div className="border-t pt-4 space-y-4">
                 <div className="flex justify-between text-lg font-semibold">
                   <span>Total:</span>
-                  <span className="text-primary">${total.toFixed(2)}</span>
+                  <span className="text-primary">₹{total.toFixed(2)}</span>
                 </div>
                 <Button
                   onClick={onCheckout}

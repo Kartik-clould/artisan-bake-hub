@@ -5,8 +5,8 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="text-xl font-serif font-bold mb-4 flex items-center gap-2">
-              <span className="text-2xl">🥐</span>
-              Sweet Haven
+                <span className="text-3xl font-extrabold text-accent drop-shadow-sm" style={{fontFamily: 'Abril Fatface, serif', letterSpacing: '0.05em'}}>SHAHI</span>
+                <span className="font-serif text-2xl font-bold tracking-tight text-primary">Baker</span>
             </h3>
             <p className="text-primary-foreground/80">
               Crafting delicious memories since 2003
@@ -56,7 +56,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/20 pt-6 text-center text-sm text-primary-foreground/60">
-          <p>&copy; 2024 Sweet Haven Bakery. All rights reserved.</p>
+          <p>&copy; 2024 Shahi Baker. Created by Team Larko's. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -31,7 +31,7 @@ const Contact = () => {
             </div>
             <h3 className="font-semibold mb-2">Phone</h3>
             <p className="text-sm text-muted-foreground">
-              (555) 123-4567
+              91+ 7977858202
             </p>
           </div>
 
@@ -41,7 +41,7 @@ const Contact = () => {
             </div>
             <h3 className="font-semibold mb-2">Email</h3>
             <p className="text-sm text-muted-foreground">
-              hello@sweethaven.com
+              shahidbakers99@gmail.com
             </p>
           </div>
 
@@ -51,8 +51,8 @@ const Contact = () => {
             </div>
             <h3 className="font-semibold mb-2">Hours</h3>
             <p className="text-sm text-muted-foreground">
-              Mon-Sat: 7am - 7pm<br />
-              Sun: 8am - 5pm
+              Mon-Sat: 7am - 9pm<br />
+              Sun: 10am - 5pm
             </p>
           </div>
         </div>
