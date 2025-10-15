@@ -70,17 +70,26 @@ const OrderForm = ({
       orderDate: new Date().toISOString(),
     };
 
-    // Simulate AJAX submission (PHP endpoint would be here)
-    console.log("Order submitted:", orderData);
+    // Submit order to PHP backend
+    try {
+      const response = await fetch('http://localhost/api/submit-order.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData)
+      });
 
-    // In production, you would send this to your PHP backend:
-    // const response = await fetch('/api/submit-order.php', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(orderData)
-    // });
+      const result = await response.json();
 
-    toast.success("Order placed successfully! We'll contact you shortly.");
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Failed to submit order');
+      }
+
+      toast.success("Order placed successfully! We'll contact you shortly.");
+    } catch (error) {
+      console.error("Order submission error:", error);
+      toast.error("Failed to submit order. Please try again.");
+      return;
+    }
     onOrderComplete();
     onClose();
 
