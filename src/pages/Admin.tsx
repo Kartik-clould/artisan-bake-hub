@@ -67,6 +67,13 @@ const Admin = () => {
 
   useEffect(() => {
     fetchOrders();
+    
+    // Poll for new orders every 5 seconds
+    const interval = setInterval(() => {
+      fetchOrders();
+    }, 5000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const formatDate = (dateString: string) => {
