@@ -77,16 +77,16 @@ CREATE TABLE order_items (
 
 -- Insert sample products
 INSERT INTO products (name, description, price, category, image_url) VALUES
-('Chocolate Cake', 'Rich chocolate layers with ganache', 35.99, 'Cakes', '/assets/products/chocolate-cake.jpg'),
-('Fresh Croissants', 'Buttery, flaky perfection', 4.99, 'Pastries', '/assets/products/croissants.jpg'),
-('Sourdough Bread', 'Artisan sourdough with crispy crust', 7.99, 'Breads', '/assets/products/sourdough.jpg'),
-('Chocolate Chip Cookies', 'Classic cookies, dozen', 12.99, 'Cookies', '/assets/products/cookies.jpg'),
-('Strawberry Cheesecake', 'Creamy cheesecake with fresh strawberries', 32.99, 'Cakes', '/assets/products/cheesecake.jpg'),
-('French Macarons', 'Assorted flavors, box of 12', 18.99, 'Pastries', '/assets/products/macarons.jpg');
+('Chocolate Cake', 'Rich chocolate layers with ganache', 350, 'Cakes', '/assets/products/chocolate-cake.jpg'),
+('Rusk', 'Crispy, twice-baked bread', 45, 'Pastries', '/assets/products/croissants.jpg'),
+('Little Hearts Cookies', 'Sweet heart-shaped cookies', 60, 'Breads', '/assets/products/sourdough.jpg'),
+('Khari', 'Crispy, And Tasty to Enjoy with Tea', 45, 'Cookies', '/assets/products/cookies.jpg'),
+('Indian Bread', 'Soft, fluffy Indian Bread', 15, 'Cakes', '/assets/products/cheesecake.jpg'),
+('Cup Cakes', 'Assorted cupcakes, box of 6', 99, 'Pastries', '/assets/products/macarons.jpg');
 
 -- Insert sample customer data
 INSERT INTO customers (name, email, phone, address) VALUES
-('John Doe', 'john.doe@example.com', '555-0101', '123 Main St, Sweet Town, ST 12345'),
+('Kartik', 'kartik@gmail.com', '123456789', 'panvel'),
 ('Jane Smith', 'jane.smith@example.com', '555-0102', '456 Oak Ave, Sweet Town, ST 12345');
 
 -- Insert sample order
@@ -97,8 +97,8 @@ INSERT INTO orders (customer_name, customer_email, customer_phone, delivery_addr
 
 -- Insert sample order items
 INSERT INTO order_items (order_id, product_id, product_name, price, quantity) VALUES
-(1, 1, 'Chocolate Cake', 35.99, 1),
-(1, 4, 'Chocolate Chip Cookies', 12.99, 1);
+(1, 1, 'Chocolate Cake', 350, 1),
+(1, 4, 'Khari', 45, 1);
 
 -- Create view for order summary
 CREATE OR REPLACE VIEW order_summary AS
