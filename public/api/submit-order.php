@@ -31,6 +31,91 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
+require_once 'db_connect.php';
+
+try {
+    // Get JSON data from request body
+    $json = file_get_contents('php://input');
+    $data = json_decode($json, true);
+
+    if (!$data) {
+        throw new Exception('Invalid JSON data');
+    }
+
+    // Start transaction
+    $conn->beginTransaction();
+
+    // Insert order
+    $orderStmt = $conn->prepare("
+        INSERT INTO orders (
+            customer_name, 
+            customer_email, 
+            customer_phone, 
+            delivery_address, 
+            delivery_method,
+            special_notes, 
+            total_amount,
+            status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending')
+    ");
+
+    $orderStmt->execute([
+        $data['customerName'],
+        $data['email'],
+        $data['phone'],
+        $data['address'],
+        $data['deliveryMethod'],
+        $data['specialNotes'] ?? '',
+        $data['totalAmount']
+    ]);
+
+    $orderId = $conn->lastInsertId();
+
+    // Insert order items
+    $itemStmt = $conn->prepare("
+        INSERT INTO order_items (
+            order_id,
+            product_id,
+            product_name,
+            price,
+            quantity
+        ) VALUES (?, ?, ?, ?, ?)
+    ");
+
+    foreach ($data['items'] as $item) {
+        $itemStmt->execute([
+            $orderId,
+            $item['id'],
+            $item['name'],
+            $item['price'],
+            $item['quantity']
+        ]);
+    }
+
+    // Commit transaction
+    $conn->commit();
+
+    // Send success response
+    echo json_encode([
+        'success' => true,
+        'message' => 'Order placed successfully',
+        'orderId' => $orderId
+    ]);
+
+} catch (Exception $e) {
+    // Rollback transaction on error
+    if ($conn->inTransaction()) {
+        $conn->rollBack();
+    }
+
+    // Send error response
+    http_response_code(500);
+    echo json_encode([
+        'error' => true,
+        'message' => 'Order failed: ' . $e->getMessage()
+    ]);
+}
+
 // Database configuration
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
@@ -214,3 +299,17 @@ function sendBakeryNotification($orderId, $customer, $items, $total) {
     error_log("Bakery notification: New order #$orderId from {$customer['name']}");
 }
 ?>
+// Database connection settings
+$host = 'localhost';
+$dbname = 'bakery_db';
+$username = 'root';
+$password = ''; // default XAMPP password is blank
+
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Database connection failed: ' . $e->getMessage()]);
+    exit();
+}

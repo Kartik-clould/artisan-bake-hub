@@ -52,6 +52,45 @@ const OrderForm = ({
       return;
     }
 
+    try {
+      const response = await fetch("http://localhost/bakery/api/submit-order.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customerName: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          deliveryMethod: formData.deliveryMethod,
+          specialNotes: formData.notes,
+          totalAmount: total,
+          items: items.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity
+          }))
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success("Order placed successfully!");
+        onOrderComplete();
+        onClose();
+      } else {
+        throw new Error(data.message || "Failed to place order");
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to place order");
+    }
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
     if (formData.deliveryMethod === "delivery" && !formData.address) {
       toast.error("Please provide a delivery address");
       return;
@@ -70,26 +109,17 @@ const OrderForm = ({
       orderDate: new Date().toISOString(),
     };
 
-    // Submit order to PHP backend
-    try {
-      const response = await fetch('http://localhost/api/submit-order.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(orderData)
-      });
+    // Simulate AJAX submission (PHP endpoint would be here)
+    console.log("Order submitted:", orderData);
 
-      const result = await response.json();
+    // In production, you would send this to your PHP backend:
+    // const response = await fetch('/api/submit-order.php', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(orderData)
+    // });
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Failed to submit order');
-      }
-
-      toast.success("Order placed successfully! We'll contact you shortly.");
-    } catch (error) {
-      console.error("Order submission error:", error);
-      toast.error("Failed to submit order. Please try again.");
-      return;
-    }
+    toast.success("Order placed successfully! We'll contact you shortly.");
     onOrderComplete();
     onClose();
 
